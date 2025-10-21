@@ -25,7 +25,7 @@
     "inputPorts" : [ ],
     "labels" : [ ],
     "maxConcurrentTasks" : 1,
-    "name" : "Openflow imported ",
+    "name" : "DEV",
     "outputPorts" : [ ],
     "position" : {
       "x" : 0.0,
@@ -786,8 +786,8 @@
       "outputPorts" : [ ],
       "parameterContextName" : "PostgreSQL Ingestion Parameters",
       "position" : {
-        "x" : -440.0,
-        "y" : -32.0
+        "x" : -1040.0,
+        "y" : -264.0
       },
       "processGroups" : [ {
         "comments" : "Prevents streams on Journal tables to become stale when data is not actively pushed within the data retention period. See https://docs.snowflake.com/en/user-guide/streams-intro#data-retention-period-and-staleness   ",
@@ -8446,14 +8446,13 @@
         "description" : "A comma-separated list of fully-qualified table names that should be replicated. The format should be <schema name>.<table name>. For example: public.table1, public.table2, public.table3",
         "name" : "Included Table Names",
         "provided" : false,
-        "sensitive" : false,
-        "value" : "poc.passengers"
+        "sensitive" : false
       }, {
         "description" : "A Regular Expression that can be matched against table names to determine if the table should be included. The Regular Expression should match the fully qualified table name. For example, to include all tables in the \"snowflake\" schema, use snowflake\\..*",
         "name" : "Included Table Regex",
         "provided" : false,
         "sensitive" : false,
-        "value" : ""
+        "value" : "poc\\..*"
       }, {
         "description" : "Determine if snapshot load should be skipped and only incremental CDC phase should take place. If set to \"incremental\" current database rows will not be replicated (snapshot will be skipped) and only new changes will be applied. Default value is \"full\" which means both snapshot and incremental will be performed.",
         "name" : "Ingestion Type",
@@ -8567,6 +8566,6 @@
   "snapshotMetadata" : {
     "author" : "OSUNI",
     "flowIdentifier" : "MyPostgresqlFlow",
-    "timestamp" : 1761048032093
+    "timestamp" : 1761048247767
   }
 }
