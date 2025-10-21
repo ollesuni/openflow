@@ -1,0 +1,11 @@
+{
+  "flow" : {
+    "createdTimestamp" : 1761048031193,
+    "description" : "",
+    "identifier" : "MyPostgresqlFlow",
+    "lastModifiedTimestamp" : 1761048031193,
+    "name" : "MyPostgresqlFlow",
+    "versionCount" : 0
+  },
+  "latest" : false
+}
