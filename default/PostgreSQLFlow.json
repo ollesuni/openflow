@@ -759,7 +759,7 @@
     "inputPorts" : [ ],
     "labels" : [ ],
     "maxConcurrentTasks" : 1,
-    "name" : "PostgreSQL case-insensitive",
+    "name" : "PostgreSQL",
     "outputPorts" : [ ],
     "parameterContextName" : "PostgreSQL Ingestion Parameters",
     "position" : {
