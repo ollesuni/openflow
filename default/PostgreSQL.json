@@ -1,11 +1,11 @@
 {
   "externalControllerServices" : { },
   "flow" : {
-    "createdTimestamp" : 1762257590350,
-    "description" : "",
-    "identifier" : "postgresql-flow",
-    "lastModifiedTimestamp" : 1762257590350,
-    "name" : "postgresql-flow",
+    "createdTimestamp" : 1762258420898,
+    "description" : "poc flow",
+    "identifier" : "PostgreSQL",
+    "lastModifiedTimestamp" : 1762258420898,
+    "name" : "PostgreSQL",
     "versionCount" : 0
   },
   "flowContents" : {
@@ -761,7 +761,7 @@
     "maxConcurrentTasks" : 1,
     "name" : "PostgreSQL",
     "outputPorts" : [ ],
-    "parameterContextName" : "PostgreSQL Ingestion Parameters (1)",
+    "parameterContextName" : "PostgreSQL Ingestion Parameters",
     "position" : {
       "x" : 0.0,
       "y" : 0.0
@@ -875,7 +875,7 @@
       "maxConcurrentTasks" : 1,
       "name" : "Stream Staleness Prevention",
       "outputPorts" : [ ],
-      "parameterContextName" : "PostgreSQL Ingestion Parameters (1)",
+      "parameterContextName" : "PostgreSQL Ingestion Parameters",
       "position" : {
         "x" : -944.0,
         "y" : 248.0
@@ -1609,7 +1609,7 @@
       "maxConcurrentTasks" : 1,
       "name" : "Snapshot Load",
       "outputPorts" : [ ],
-      "parameterContextName" : "PostgreSQL Ingestion Parameters (1)",
+      "parameterContextName" : "PostgreSQL Ingestion Parameters",
       "position" : {
         "x" : -1208.0,
         "y" : -24.0
@@ -2747,7 +2747,7 @@
         "maxConcurrentTasks" : 1,
         "name" : "Perform Snapshot Load",
         "outputPorts" : [ ],
-        "parameterContextName" : "PostgreSQL Ingestion Parameters (1)",
+        "parameterContextName" : "PostgreSQL Ingestion Parameters",
         "position" : {
           "x" : -296.0,
           "y" : 200.0
@@ -5594,7 +5594,7 @@
       "maxConcurrentTasks" : 1,
       "name" : "Incremental Load",
       "outputPorts" : [ ],
-      "parameterContextName" : "PostgreSQL Ingestion Parameters (1)",
+      "parameterContextName" : "PostgreSQL Ingestion Parameters",
       "position" : {
         "x" : -672.0,
         "y" : -24.0
@@ -5871,7 +5871,7 @@
         "maxConcurrentTasks" : 1,
         "name" : "Create Journal Table",
         "outputPorts" : [ ],
-        "parameterContextName" : "PostgreSQL Ingestion Parameters (1)",
+        "parameterContextName" : "PostgreSQL Ingestion Parameters",
         "position" : {
           "x" : 368.0,
           "y" : -32.0
@@ -8315,10 +8315,10 @@
   "flowEncodingVersion" : "1.0",
   "latest" : false,
   "parameterContexts" : {
-    "PostgreSQL Ingestion Parameters (1)" : {
+    "PostgreSQL Ingestion Parameters" : {
       "componentType" : "PARAMETER_CONTEXT",
       "inheritedParameterContexts" : [ "PostgreSQL Destination Parameters", "PostgreSQL Source Parameters" ],
-      "name" : "PostgreSQL Ingestion Parameters (1)",
+      "name" : "PostgreSQL Ingestion Parameters",
       "parameters" : [ {
         "description" : "A JSON specifying which columns and column patterns should be included or excluded from replication, per table. Takes the form of an array with one object per table, e.g. [ {\"schema\":\"public\", \"table\":\"table1\", \"includedPattern\":\".*name\"} ] - this will include all columns that end with 'name' in the 'table1' from the 'public' schema",
         "name" : "Column Filter JSON",
@@ -8347,7 +8347,7 @@
         "name" : "Merge Task Schedule CRON",
         "provided" : false,
         "sensitive" : false,
-        "value" : "* * * * * ?"
+        "value" : "0 0 * * * ?"
       }, {
         "description" : "Do not change after initial start of the connector. Determines if schema / table / column names are treated as case-sensitive or case-insensitive. One of: CASE_INSENSITIVE / CASE_SENSITIVE",
         "name" : "Object Identifier Resolution",
@@ -8454,7 +8454,7 @@
   "parameterProviders" : { },
   "snapshotMetadata" : {
     "author" : "OSUNI",
-    "flowIdentifier" : "postgresql-flow",
-    "timestamp" : 1762257591159
+    "flowIdentifier" : "PostgreSQL",
+    "timestamp" : 1762258421724
   }
 }
