@@ -1,0 +1,11 @@
+{
+  "flow" : {
+    "createdTimestamp" : 1762258420898,
+    "description" : "poc flow",
+    "identifier" : "PostgreSQL",
+    "lastModifiedTimestamp" : 1762258420898,
+    "name" : "PostgreSQL",
+    "versionCount" : 0
+  },
+  "latest" : false
+}
