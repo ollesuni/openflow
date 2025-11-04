@@ -782,7 +782,7 @@
       "inputPorts" : [ ],
       "labels" : [ ],
       "maxConcurrentTasks" : 1,
-      "name" : "PostgreSQL",
+      "name" : "PostgreSQL case-insensitive",
       "outputPorts" : [ ],
       "parameterContextName" : "PostgreSQL Ingestion Parameters",
       "position" : {
@@ -8483,6 +8483,6 @@
   "snapshotMetadata" : {
     "author" : "OSUNI",
     "flowIdentifier" : "PostgreSQLFlow",
-    "timestamp" : 1762259822098
+    "timestamp" : 1762259942205
   }
 }
