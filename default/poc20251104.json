@@ -1,0 +1,11 @@
+{
+  "flow" : {
+    "createdTimestamp" : 1762246772179,
+    "description" : "PoC demo flow",
+    "identifier" : "poc20251104",
+    "lastModifiedTimestamp" : 1762246772179,
+    "name" : "poc_20251104",
+    "versionCount" : 0
+  },
+  "latest" : false
+}
