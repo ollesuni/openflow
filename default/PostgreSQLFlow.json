@@ -9,7 +9,7 @@
     "versionCount" : 0
   },
   "flowContents" : {
-    "comments" : "0.26.0-eb9704f",
+    "comments" : "Switched to default CRON schedule ",
     "componentType" : "PROCESS_GROUP",
     "connections" : [ ],
     "controllerServices" : [ {
@@ -8347,7 +8347,7 @@
         "name" : "Merge Task Schedule CRON",
         "provided" : false,
         "sensitive" : false,
-        "value" : "0 0 * * * ?"
+        "value" : "* * * * * ?"
       }, {
         "description" : "Do not change after initial start of the connector. Determines if schema / table / column names are treated as case-sensitive or case-insensitive. One of: CASE_INSENSITIVE / CASE_SENSITIVE",
         "name" : "Object Identifier Resolution",
@@ -8455,6 +8455,6 @@
   "snapshotMetadata" : {
     "author" : "OSUNI",
     "flowIdentifier" : "PostgreSQLFlow",
-    "timestamp" : 1762260105851
+    "timestamp" : 1762260568797
   }
 }
