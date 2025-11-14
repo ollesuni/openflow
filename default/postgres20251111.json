@@ -2749,8 +2749,8 @@
         "outputPorts" : [ ],
         "parameterContextName" : "PostgreSQL Ingestion Parameters",
         "position" : {
-          "x" : -296.0,
-          "y" : 200.0
+          "x" : -288.0,
+          "y" : 264.0
         },
         "processGroups" : [ ],
         "processors" : [ {
@@ -8317,7 +8317,8 @@
   "parameterContexts" : {
     "PostgreSQL Ingestion Parameters" : {
       "componentType" : "PARAMETER_CONTEXT",
-      "inheritedParameterContexts" : [ "PostgreSQL Destination Parameters", "PostgreSQL Source Parameters" ],
+      "description" : "Changed cron",
+      "inheritedParameterContexts" : [ "Environment Secrets", "PostgreSQL Destination Parameters", "PostgreSQL Source Parameters" ],
       "name" : "PostgreSQL Ingestion Parameters",
       "parameters" : [ {
         "description" : "A JSON specifying which columns and column patterns should be included or excluded from replication, per table. Takes the form of an array with one object per table, e.g. [ {\"schema\":\"public\", \"table\":\"table1\", \"includedPattern\":\".*name\"} ] - this will include all columns that end with 'name' in the 'table1' from the 'public' schema",
@@ -8347,7 +8348,7 @@
         "name" : "Merge Task Schedule CRON",
         "provided" : false,
         "sensitive" : false,
-        "value" : "* * * * * ?"
+        "value" : "0 * * * * ?"
       }, {
         "description" : "Do not change after initial start of the connector. Determines if schema / table / column names are treated as case-sensitive or case-insensitive. One of: CASE_INSENSITIVE / CASE_SENSITIVE",
         "name" : "Object Identifier Resolution",
@@ -8441,8 +8442,7 @@
         "description" : "Snowflake warehouse used to run queries",
         "name" : "Snowflake Warehouse",
         "provided" : false,
-        "sensitive" : false,
-        "value" : "OPENFLOW_WH"
+        "sensitive" : false
       } ]
     },
     "Environment Secrets" : {
@@ -8504,6 +8504,6 @@
   "snapshotMetadata" : {
     "author" : "OSUNI",
     "flowIdentifier" : "postgres20251111",
-    "timestamp" : 1762862163243
+    "timestamp" : 1763120967547
   }
 }
