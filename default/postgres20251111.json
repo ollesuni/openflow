@@ -1617,8 +1617,8 @@
       "outputPorts" : [ ],
       "parameterContextName" : "PostgreSQL Ingestion Parameters",
       "position" : {
-        "x" : -1416.0,
-        "y" : 64.0
+        "x" : -1360.0,
+        "y" : -8.0
       },
       "processGroups" : [ {
         "comments" : "Runs the actual snapshot load for every newly-added table.",
@@ -8497,6 +8497,6 @@
   "snapshotMetadata" : {
     "author" : "OSUNI",
     "flowIdentifier" : "postgres20251111",
-    "timestamp" : 1764066125037
+    "timestamp" : 1765285176277
   }
 }
