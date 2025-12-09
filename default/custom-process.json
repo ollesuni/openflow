@@ -1,0 +1,11 @@
+{
+  "flow" : {
+    "createdTimestamp" : 1765285541084,
+    "description" : "my custom process",
+    "identifier" : "custom-process",
+    "lastModifiedTimestamp" : 1765285541084,
+    "name" : "custom process",
+    "versionCount" : 0
+  },
+  "latest" : false
+}
