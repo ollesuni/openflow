@@ -1,0 +1,11 @@
+{
+  "flow" : {
+    "createdTimestamp" : 1765285376893,
+    "description" : "dummy sub process",
+    "identifier" : "sub-process",
+    "lastModifiedTimestamp" : 1765285376893,
+    "name" : "sub process",
+    "versionCount" : 0
+  },
+  "latest" : false
+}
