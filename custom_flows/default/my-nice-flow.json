@@ -1,0 +1,11 @@
+{
+  "flow" : {
+    "createdTimestamp" : 1768907926258,
+    "description" : "testi",
+    "identifier" : "my-nice-flow",
+    "lastModifiedTimestamp" : 1768907926258,
+    "name" : "my-nice-flow",
+    "versionCount" : 0
+  },
+  "latest" : false
+}
