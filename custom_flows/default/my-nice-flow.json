@@ -32,43 +32,7 @@
       "x" : 0.0,
       "y" : 0.0
     },
-    "processGroups" : [ {
-      "comments" : "",
-      "componentType" : "PROCESS_GROUP",
-      "connections" : [ ],
-      "controllerServices" : [ ],
-      "defaultBackPressureDataSizeThreshold" : "1 GB",
-      "defaultBackPressureObjectThreshold" : 10000,
-      "defaultFlowFileExpiration" : "0 sec",
-      "executionEngine" : "INHERITED",
-      "flowFileConcurrency" : "UNBOUNDED",
-      "flowFileOutboundPolicy" : "STREAM_WHEN_AVAILABLE",
-      "funnels" : [ ],
-      "groupIdentifier" : "flow-contents-group",
-      "identifier" : "acd67cbe-867c-3e56-ba00-6eb8d4be1b42",
-      "inputPorts" : [ ],
-      "labels" : [ ],
-      "maxConcurrentTasks" : 1,
-      "name" : "sub process",
-      "outputPorts" : [ ],
-      "parameterContextName" : "Environment Context",
-      "position" : {
-        "x" : -864.0,
-        "y" : -128.0
-      },
-      "processGroups" : [ ],
-      "processors" : [ ],
-      "remoteProcessGroups" : [ ],
-      "scheduledState" : "ENABLED",
-      "statelessFlowTimeout" : "1 min",
-      "versionedFlowCoordinates" : {
-        "branch" : "dev",
-        "bucketId" : "default",
-        "flowId" : "sub-process",
-        "storageLocation" : "git@github.com:ollesuni/openflow.git",
-        "version" : "f6167b6413e98c4217aeb3a220e2d56b1103df2b"
-      }
-    } ],
+    "processGroups" : [ ],
     "processors" : [ {
       "autoTerminatedRelationships" : [ ],
       "backoffMechanism" : "PENALIZE_FLOWFILE",
@@ -636,6 +600,6 @@
   "snapshotMetadata" : {
     "author" : "OSUNI",
     "flowIdentifier" : "my-nice-flow",
-    "timestamp" : 1768907927384
+    "timestamp" : 1768908623702
   }
 }
