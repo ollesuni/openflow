@@ -1,0 +1,11 @@
+{
+  "flow" : {
+    "createdTimestamp" : 1768907715662,
+    "description" : "fdadfas",
+    "identifier" : "my-custom-flow",
+    "lastModifiedTimestamp" : 1768907715662,
+    "name" : "my-custom-flow",
+    "versionCount" : 0
+  },
+  "latest" : false
+}
