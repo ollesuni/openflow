@@ -17,7 +17,7 @@
       "bundle" : {
         "artifact" : "runtime-database-cdc-services-nar",
         "group" : "com.snowflake.openflow.runtime",
-        "version" : "2025.10.30.21"
+        "version" : "2025.11.20.19"
       },
       "comments" : "Keeps a list of table column filters, to include or exclude certain columns from replication.",
       "componentType" : "CONTROLLER_SERVICE",
@@ -25,7 +25,7 @@
         "bundle" : {
           "artifact" : "runtime-database-cdc-services-api-nar",
           "group" : "com.snowflake.openflow.runtime",
-          "version" : "2025.10.30.21"
+          "version" : "2025.11.20.19"
         },
         "type" : "com.snowflake.openflow.runtime.services.database.schema.TableColumnFilterService"
       } ],
@@ -51,7 +51,7 @@
       "bundle" : {
         "artifact" : "nifi-record-serialization-services-nar",
         "group" : "org.apache.nifi",
-        "version" : "2025.10.30.21"
+        "version" : "2025.11.20.19"
       },
       "comments" : "Used to deserialize database rows from FlowFiles.",
       "componentType" : "CONTROLLER_SERVICE",
@@ -59,7 +59,7 @@
         "bundle" : {
           "artifact" : "nifi-standard-services-api-nar",
           "group" : "org.apache.nifi",
-          "version" : "2025.10.28.18"
+          "version" : "2025.11.20.20"
         },
         "type" : "org.apache.nifi.serialization.RecordReaderFactory"
       } ],
@@ -69,10 +69,10 @@
       "properties" : {
         "Schema Text" : "${avro.schema}",
         "Max String Length" : "20 MB",
-        "schema-application-strategy" : "SELECTED_PART",
+        "Starting Field Strategy" : "ROOT_NODE",
         "Schema Access Strategy" : "infer-schema",
         "Schema Name" : "${schema.name}",
-        "starting-field-strategy" : "ROOT_NODE",
+        "Schema Application Strategy" : "SELECTED_PART",
         "Allow Comments" : "false"
       },
       "propertyDescriptors" : {
@@ -97,6 +97,13 @@
           "name" : "Schema Text",
           "sensitive" : false
         },
+        "Starting Field Name" : {
+          "displayName" : "Starting Field Name",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Starting Field Name",
+          "sensitive" : false
+        },
         "Max String Length" : {
           "displayName" : "Max String Length",
           "dynamic" : false,
@@ -104,11 +111,18 @@
           "name" : "Max String Length",
           "sensitive" : false
         },
-        "schema-application-strategy" : {
-          "displayName" : "Schema Application Strategy",
+        "Schema Inference Cache" : {
+          "displayName" : "Schema Inference Cache",
+          "dynamic" : false,
+          "identifiesControllerService" : true,
+          "name" : "Schema Inference Cache",
+          "sensitive" : false
+        },
+        "Starting Field Strategy" : {
+          "displayName" : "Starting Field Strategy",
           "dynamic" : false,
           "identifiesControllerService" : false,
-          "name" : "schema-application-strategy",
+          "name" : "Starting Field Strategy",
           "sensitive" : false
         },
         "Schema Registry" : {
@@ -139,13 +153,6 @@
           "name" : "Timestamp Format",
           "sensitive" : false
         },
-        "schema-inference-cache" : {
-          "displayName" : "Schema Inference Cache",
-          "dynamic" : false,
-          "identifiesControllerService" : true,
-          "name" : "schema-inference-cache",
-          "sensitive" : false
-        },
         "Date Format" : {
           "displayName" : "Date Format",
           "dynamic" : false,
@@ -153,11 +160,11 @@
           "name" : "Date Format",
           "sensitive" : false
         },
-        "starting-field-strategy" : {
-          "displayName" : "Starting Field Strategy",
+        "Schema Application Strategy" : {
+          "displayName" : "Schema Application Strategy",
           "dynamic" : false,
           "identifiesControllerService" : false,
-          "name" : "starting-field-strategy",
+          "name" : "Schema Application Strategy",
           "sensitive" : false
         },
         "Schema Version" : {
@@ -165,13 +172,6 @@
           "dynamic" : false,
           "identifiesControllerService" : false,
           "name" : "Schema Version",
-          "sensitive" : false
-        },
-        "starting-field-name" : {
-          "displayName" : "Starting Field Name",
-          "dynamic" : false,
-          "identifiesControllerService" : false,
-          "name" : "starting-field-name",
           "sensitive" : false
         },
         "Time Format" : {
@@ -196,7 +196,7 @@
       "bundle" : {
         "artifact" : "nifi-record-serialization-services-nar",
         "group" : "org.apache.nifi",
-        "version" : "2025.10.30.21"
+        "version" : "2025.11.20.19"
       },
       "comments" : "Used to serialize database rows into FlowFiles.",
       "componentType" : "CONTROLLER_SERVICE",
@@ -204,7 +204,7 @@
         "bundle" : {
           "artifact" : "nifi-standard-services-api-nar",
           "group" : "org.apache.nifi",
-          "version" : "2025.10.28.18"
+          "version" : "2025.11.20.20"
         },
         "type" : "org.apache.nifi.serialization.RecordSetWriterFactory"
       } ],
@@ -214,14 +214,14 @@
       "properties" : {
         "Schema Text" : "${avro.schema}",
         "Allow Scientific Notation" : "true",
-        "compression-level" : "1",
+        "Compression Level" : "1",
+        "Output Grouping" : "output-oneline",
         "Schema Access Strategy" : "inherit-record-schema",
         "Schema Name" : "${schema.name}",
         "Pretty Print JSON" : "false",
-        "compression-format" : "none",
+        "Suppress Null Values" : "never-suppress",
         "Schema Write Strategy" : "no-schema",
-        "suppress-nulls" : "never-suppress",
-        "output-grouping" : "output-oneline"
+        "Compression Format" : "none"
       },
       "propertyDescriptors" : {
         "Schema Branch" : {
@@ -252,11 +252,18 @@
           "name" : "Allow Scientific Notation",
           "sensitive" : false
         },
-        "compression-level" : {
+        "Compression Level" : {
           "displayName" : "Compression Level",
           "dynamic" : false,
           "identifiesControllerService" : false,
-          "name" : "compression-level",
+          "name" : "Compression Level",
+          "sensitive" : false
+        },
+        "Output Grouping" : {
+          "displayName" : "Output Grouping",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Output Grouping",
           "sensitive" : false
         },
         "Schema Registry" : {
@@ -301,11 +308,11 @@
           "name" : "Pretty Print JSON",
           "sensitive" : false
         },
-        "compression-format" : {
-          "displayName" : "Compression Format",
+        "Suppress Null Values" : {
+          "displayName" : "Suppress Null Values",
           "dynamic" : false,
           "identifiesControllerService" : false,
-          "name" : "compression-format",
+          "name" : "Suppress Null Values",
           "sensitive" : false
         },
         "Schema Write Strategy" : {
@@ -315,18 +322,11 @@
           "name" : "Schema Write Strategy",
           "sensitive" : false
         },
-        "suppress-nulls" : {
-          "displayName" : "Suppress Null Values",
+        "Compression Format" : {
+          "displayName" : "Compression Format",
           "dynamic" : false,
           "identifiesControllerService" : false,
-          "name" : "suppress-nulls",
-          "sensitive" : false
-        },
-        "output-grouping" : {
-          "displayName" : "Output Grouping",
-          "dynamic" : false,
-          "identifiesControllerService" : false,
-          "name" : "output-grouping",
+          "name" : "Compression Format",
           "sensitive" : false
         },
         "Schema Cache" : {
@@ -365,7 +365,7 @@
       "bundle" : {
         "artifact" : "runtime-snowflake-connection-service-nar",
         "group" : "com.snowflake.openflow.runtime",
-        "version" : "2025.10.30.21"
+        "version" : "2025.11.20.19"
       },
       "comments" : "",
       "componentType" : "CONTROLLER_SERVICE",
@@ -373,7 +373,7 @@
         "bundle" : {
           "artifact" : "nifi-standard-services-api-nar",
           "group" : "org.apache.nifi",
-          "version" : "2025.10.28.18"
+          "version" : "2025.11.20.20"
         },
         "type" : "org.apache.nifi.dbcp.DBCPService"
       } ],
@@ -501,7 +501,7 @@
       "bundle" : {
         "artifact" : "runtime-database-cdc-services-nar",
         "group" : "com.snowflake.openflow.runtime",
-        "version" : "2025.10.30.21"
+        "version" : "2025.11.20.19"
       },
       "comments" : "Keeps a register of the latest source table schemas to compare against incoming DDL events from the CDC stream.",
       "componentType" : "CONTROLLER_SERVICE",
@@ -509,7 +509,7 @@
         "bundle" : {
           "artifact" : "runtime-database-cdc-services-api-nar",
           "group" : "com.snowflake.openflow.runtime",
-          "version" : "2025.10.30.21"
+          "version" : "2025.11.20.19"
         },
         "type" : "com.snowflake.openflow.runtime.services.database.schema.CdcSchemaRegistry"
       } ],
@@ -525,7 +525,7 @@
       "bundle" : {
         "artifact" : "nifi-dbcp-service-nar",
         "group" : "org.apache.nifi",
-        "version" : "2025.10.30.21"
+        "version" : "2025.11.20.19"
       },
       "comments" : "",
       "componentType" : "CONTROLLER_SERVICE",
@@ -533,7 +533,7 @@
         "bundle" : {
           "artifact" : "nifi-standard-services-api-nar",
           "group" : "org.apache.nifi",
-          "version" : "2025.10.28.18"
+          "version" : "2025.11.20.20"
         },
         "type" : "org.apache.nifi.dbcp.DBCPService"
       } ],
@@ -542,10 +542,10 @@
       "name" : "PostgreSQL Connection Pool",
       "properties" : {
         "Maximum Idle Connections" : "8",
+        "Database Driver Locations" : "#{PostgreSQL JDBC Driver}",
         "Max Wait Time" : "500 millis",
         "Database Driver Class Name" : "org.postgresql.Driver",
         "Minimum Idle Connections" : "0",
-        "Database Driver Location(s)" : "#{PostgreSQL JDBC Driver}",
         "Max Total Connections" : "8",
         "Database Connection URL" : "#{PostgreSQL Connection URL}",
         "Time Between Eviction Runs" : "-1",
@@ -561,6 +561,17 @@
           "dynamic" : false,
           "identifiesControllerService" : false,
           "name" : "Maximum Idle Connections",
+          "sensitive" : false
+        },
+        "Database Driver Locations" : {
+          "displayName" : "Database Driver Locations",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Database Driver Locations",
+          "resourceDefinition" : {
+            "cardinality" : "MULTIPLE",
+            "resourceTypes" : [ "DIRECTORY", "FILE", "URL" ]
+          },
           "sensitive" : false
         },
         "Max Wait Time" : {
@@ -582,17 +593,6 @@
           "dynamic" : false,
           "identifiesControllerService" : false,
           "name" : "Minimum Idle Connections",
-          "sensitive" : false
-        },
-        "Database Driver Location(s)" : {
-          "displayName" : "Database Driver Location(s)",
-          "dynamic" : false,
-          "identifiesControllerService" : false,
-          "name" : "Database Driver Location(s)",
-          "resourceDefinition" : {
-            "cardinality" : "MULTIPLE",
-            "resourceTypes" : [ "DIRECTORY", "FILE", "URL" ]
-          },
           "sensitive" : false
         },
         "Kerberos User Service" : {
@@ -673,7 +673,7 @@
       "bundle" : {
         "artifact" : "nifi-key-service-nar",
         "group" : "org.apache.nifi",
-        "version" : "2025.10.30.21"
+        "version" : "2025.11.20.19"
       },
       "comments" : "",
       "componentType" : "CONTROLLER_SERVICE",
@@ -681,7 +681,7 @@
         "bundle" : {
           "artifact" : "nifi-standard-services-api-nar",
           "group" : "org.apache.nifi",
-          "version" : "2025.10.28.18"
+          "version" : "2025.11.20.20"
         },
         "type" : "org.apache.nifi.key.service.api.PrivateKeyService"
       } ],
@@ -689,34 +689,34 @@
       "identifier" : "a9d0fce7-8560-33f6-8ed0-992949862808",
       "name" : "Snowflake Private Key Service",
       "properties" : {
-        "key-password" : "#{Snowflake Private Key Password}",
-        "key-file" : "#{Snowflake Private Key File}",
-        "key" : "#{Snowflake Private Key}"
+        "Key File" : "#{Snowflake Private Key File}",
+        "Key Password" : "#{Snowflake Private Key Password}",
+        "Key" : "#{Snowflake Private Key}"
       },
       "propertyDescriptors" : {
-        "key-password" : {
-          "displayName" : "Key Password",
-          "dynamic" : false,
-          "identifiesControllerService" : false,
-          "name" : "key-password",
-          "sensitive" : true
-        },
-        "key-file" : {
+        "Key File" : {
           "displayName" : "Key File",
           "dynamic" : false,
           "identifiesControllerService" : false,
-          "name" : "key-file",
+          "name" : "Key File",
           "resourceDefinition" : {
             "cardinality" : "SINGLE",
             "resourceTypes" : [ "FILE" ]
           },
           "sensitive" : false
         },
-        "key" : {
+        "Key Password" : {
+          "displayName" : "Key Password",
+          "dynamic" : false,
+          "identifiesControllerService" : false,
+          "name" : "Key Password",
+          "sensitive" : true
+        },
+        "Key" : {
           "displayName" : "Key",
           "dynamic" : false,
           "identifiesControllerService" : false,
-          "name" : "key",
+          "name" : "Key",
           "sensitive" : true
         }
       },
@@ -727,7 +727,7 @@
       "bundle" : {
         "artifact" : "runtime-database-cdc-services-nar",
         "group" : "com.snowflake.openflow.runtime",
-        "version" : "2025.10.30.21"
+        "version" : "2025.11.20.19"
       },
       "comments" : "Keeps a list of tables under replication, and the stage of replication they're in.",
       "componentType" : "CONTROLLER_SERVICE",
@@ -735,7 +735,7 @@
         "bundle" : {
           "artifact" : "runtime-database-cdc-services-api-nar",
           "group" : "com.snowflake.openflow.runtime",
-          "version" : "2025.10.30.21"
+          "version" : "2025.11.20.19"
         },
         "type" : "com.snowflake.openflow.runtime.state.TableStateService"
       } ],
@@ -888,7 +888,7 @@
         "bundle" : {
           "artifact" : "nifi-standard-nar",
           "group" : "org.apache.nifi",
-          "version" : "2025.10.30.21"
+          "version" : "2025.11.20.19"
         },
         "comments" : "",
         "componentType" : "PROCESSOR",
@@ -939,7 +939,7 @@
         "bundle" : {
           "artifact" : "nifi-standard-nar",
           "group" : "org.apache.nifi",
-          "version" : "2025.10.30.21"
+          "version" : "2025.11.20.19"
         },
         "comments" : "",
         "componentType" : "PROCESSOR",
@@ -1038,7 +1038,7 @@
         "bundle" : {
           "artifact" : "nifi-standard-nar",
           "group" : "org.apache.nifi",
-          "version" : "2025.10.30.21"
+          "version" : "2025.11.20.19"
         },
         "comments" : "",
         "componentType" : "PROCESSOR",
@@ -1054,32 +1054,25 @@
           "y" : -680.0
         },
         "properties" : {
-          "esql-max-rows" : "1",
-          "esqlrecord-record-writer" : "50c96126-f1cd-3111-9aad-4b47b2856551",
+          "Set Auto Commit" : "true",
           "Max Wait Time" : "0 seconds",
           "SQL Query" : "SHOW STREAMS like '%journal%' IN DATABASE #{Destination Database}",
+          "Normalize Table/Column Names" : "false",
           "Database Connection Pooling Service" : "7953bc13-7d05-31c3-90ec-789465030bbf",
           "Default Decimal Scale" : "0",
-          "esql-auto-commit" : "true",
-          "esql-output-batch-size" : "0",
-          "esql-fetch-size" : "0",
+          "Fetch Size" : "0",
+          "Output Batch Size" : "0",
           "Use Avro Logical Types" : "false",
-          "esqlrecord-normalize" : "false",
-          "Default Decimal Precision" : "10"
+          "Record Writer" : "50c96126-f1cd-3111-9aad-4b47b2856551",
+          "Default Decimal Precision" : "10",
+          "Max Rows Per Flow File" : "1"
         },
         "propertyDescriptors" : {
-          "esql-max-rows" : {
-            "displayName" : "Max Rows Per Flow File",
+          "Set Auto Commit" : {
+            "displayName" : "Set Auto Commit",
             "dynamic" : false,
             "identifiesControllerService" : false,
-            "name" : "esql-max-rows",
-            "sensitive" : false
-          },
-          "esqlrecord-record-writer" : {
-            "displayName" : "Record Writer",
-            "dynamic" : false,
-            "identifiesControllerService" : true,
-            "name" : "esqlrecord-record-writer",
+            "name" : "Set Auto Commit",
             "sensitive" : false
           },
           "Max Wait Time" : {
@@ -1096,18 +1089,18 @@
             "name" : "SQL Query",
             "sensitive" : false
           },
+          "Normalize Table/Column Names" : {
+            "displayName" : "Normalize Table/Column Names",
+            "dynamic" : false,
+            "identifiesControllerService" : false,
+            "name" : "Normalize Table/Column Names",
+            "sensitive" : false
+          },
           "Database Connection Pooling Service" : {
             "displayName" : "Database Connection Pooling Service",
             "dynamic" : false,
             "identifiesControllerService" : true,
             "name" : "Database Connection Pooling Service",
-            "sensitive" : false
-          },
-          "sql-post-query" : {
-            "displayName" : "SQL Post-Query",
-            "dynamic" : false,
-            "identifiesControllerService" : false,
-            "name" : "sql-post-query",
             "sensitive" : false
           },
           "Default Decimal Scale" : {
@@ -1117,32 +1110,25 @@
             "name" : "Default Decimal Scale",
             "sensitive" : false
           },
-          "esql-auto-commit" : {
-            "displayName" : "Set Auto Commit",
+          "SQL Post-Query" : {
+            "displayName" : "SQL Post-Query",
             "dynamic" : false,
             "identifiesControllerService" : false,
-            "name" : "esql-auto-commit",
+            "name" : "SQL Post-Query",
             "sensitive" : false
           },
-          "sql-pre-query" : {
-            "displayName" : "SQL Pre-Query",
-            "dynamic" : false,
-            "identifiesControllerService" : false,
-            "name" : "sql-pre-query",
-            "sensitive" : false
-          },
-          "esql-output-batch-size" : {
-            "displayName" : "Output Batch Size",
-            "dynamic" : false,
-            "identifiesControllerService" : false,
-            "name" : "esql-output-batch-size",
-            "sensitive" : false
-          },
-          "esql-fetch-size" : {
+          "Fetch Size" : {
             "displayName" : "Fetch Size",
             "dynamic" : false,
             "identifiesControllerService" : false,
-            "name" : "esql-fetch-size",
+            "name" : "Fetch Size",
+            "sensitive" : false
+          },
+          "Output Batch Size" : {
+            "displayName" : "Output Batch Size",
+            "dynamic" : false,
+            "identifiesControllerService" : false,
+            "name" : "Output Batch Size",
             "sensitive" : false
           },
           "Use Avro Logical Types" : {
@@ -1152,11 +1138,18 @@
             "name" : "Use Avro Logical Types",
             "sensitive" : false
           },
-          "esqlrecord-normalize" : {
-            "displayName" : "Normalize Table/Column Names",
+          "Record Writer" : {
+            "displayName" : "Record Writer",
+            "dynamic" : false,
+            "identifiesControllerService" : true,
+            "name" : "Record Writer",
+            "sensitive" : false
+          },
+          "SQL Pre-Query" : {
+            "displayName" : "SQL Pre-Query",
             "dynamic" : false,
             "identifiesControllerService" : false,
-            "name" : "esqlrecord-normalize",
+            "name" : "SQL Pre-Query",
             "sensitive" : false
           },
           "Default Decimal Precision" : {
@@ -1164,6 +1157,13 @@
             "dynamic" : false,
             "identifiesControllerService" : false,
             "name" : "Default Decimal Precision",
+            "sensitive" : false
+          },
+          "Max Rows Per Flow File" : {
+            "displayName" : "Max Rows Per Flow File",
+            "dynamic" : false,
+            "identifiesControllerService" : false,
+            "name" : "Max Rows Per Flow File",
             "sensitive" : false
           }
         },
@@ -1183,7 +1183,7 @@
         "bundle" : {
           "artifact" : "nifi-standard-nar",
           "group" : "org.apache.nifi",
-          "version" : "2025.10.30.21"
+          "version" : "2025.11.20.19"
         },
         "comments" : "",
         "componentType" : "PROCESSOR",
@@ -1199,26 +1199,26 @@
           "y" : -40.0
         },
         "properties" : {
-          "esql-max-rows" : "0",
+          "Set Auto Commit" : "true",
           "Max Wait Time" : "0 seconds",
           "SQL Query" : "select SYSTEM$STREAM_HAS_DATA('\\\"${databaseName}\\\".\\\"${schemaName}\\\".\\\"${streamName}\\\"') as result",
           "Database Connection Pooling Service" : "7953bc13-7d05-31c3-90ec-789465030bbf",
           "Default Decimal Scale" : "0",
-          "esql-auto-commit" : "true",
-          "compression-format" : "NONE",
-          "esql-output-batch-size" : "0",
-          "esql-fetch-size" : "0",
+          "Fetch Size" : "0",
+          "Output Batch Size" : "0",
           "Use Avro Logical Types" : "false",
+          "Compression Format" : "NONE",
           "Normalize Table and Column Names" : "false",
           "Default Decimal Precision" : "10",
-          "Content Output Strategy" : "EMPTY"
+          "Content Output Strategy" : "EMPTY",
+          "Max Rows Per Flow File" : "0"
         },
         "propertyDescriptors" : {
-          "esql-max-rows" : {
-            "displayName" : "Max Rows Per Flow File",
+          "Set Auto Commit" : {
+            "displayName" : "Set Auto Commit",
             "dynamic" : false,
             "identifiesControllerService" : false,
-            "name" : "esql-max-rows",
+            "name" : "Set Auto Commit",
             "sensitive" : false
           },
           "Max Wait Time" : {
@@ -1242,13 +1242,6 @@
             "name" : "Database Connection Pooling Service",
             "sensitive" : false
           },
-          "sql-post-query" : {
-            "displayName" : "SQL Post-Query",
-            "dynamic" : false,
-            "identifiesControllerService" : false,
-            "name" : "sql-post-query",
-            "sensitive" : false
-          },
           "Default Decimal Scale" : {
             "displayName" : "Default Decimal Scale",
             "dynamic" : false,
@@ -1256,39 +1249,25 @@
             "name" : "Default Decimal Scale",
             "sensitive" : false
           },
-          "esql-auto-commit" : {
-            "displayName" : "Set Auto Commit",
+          "SQL Post-Query" : {
+            "displayName" : "SQL Post-Query",
             "dynamic" : false,
             "identifiesControllerService" : false,
-            "name" : "esql-auto-commit",
+            "name" : "SQL Post-Query",
             "sensitive" : false
           },
-          "sql-pre-query" : {
-            "displayName" : "SQL Pre-Query",
-            "dynamic" : false,
-            "identifiesControllerService" : false,
-            "name" : "sql-pre-query",
-            "sensitive" : false
-          },
-          "compression-format" : {
-            "displayName" : "Compression Format",
-            "dynamic" : false,
-            "identifiesControllerService" : false,
-            "name" : "compression-format",
-            "sensitive" : false
-          },
-          "esql-output-batch-size" : {
-            "displayName" : "Output Batch Size",
-            "dynamic" : false,
-            "identifiesControllerService" : false,
-            "name" : "esql-output-batch-size",
-            "sensitive" : false
-          },
-          "esql-fetch-size" : {
+          "Fetch Size" : {
             "displayName" : "Fetch Size",
             "dynamic" : false,
             "identifiesControllerService" : false,
-            "name" : "esql-fetch-size",
+            "name" : "Fetch Size",
+            "sensitive" : false
+          },
+          "Output Batch Size" : {
+            "displayName" : "Output Batch Size",
+            "dynamic" : false,
+            "identifiesControllerService" : false,
+            "name" : "Output Batch Size",
             "sensitive" : false
           },
           "Use Avro Logical Types" : {
@@ -1298,11 +1277,25 @@
             "name" : "Use Avro Logical Types",
             "sensitive" : false
           },
+          "Compression Format" : {
+            "displayName" : "Compression Format",
+            "dynamic" : false,
+            "identifiesControllerService" : false,
+            "name" : "Compression Format",
+            "sensitive" : false
+          },
           "Normalize Table and Column Names" : {
             "displayName" : "Normalize Table and Column Names",
             "dynamic" : false,
             "identifiesControllerService" : false,
             "name" : "Normalize Table and Column Names",
+            "sensitive" : false
+          },
+          "SQL Pre-Query" : {
+            "displayName" : "SQL Pre-Query",
+            "dynamic" : false,
+            "identifiesControllerService" : false,
+            "name" : "SQL Pre-Query",
             "sensitive" : false
           },
           "Default Decimal Precision" : {
@@ -1317,6 +1310,13 @@
             "dynamic" : false,
             "identifiesControllerService" : false,
             "name" : "Content Output Strategy",
+            "sensitive" : false
+          },
+          "Max Rows Per Flow File" : {
+            "displayName" : "Max Rows Per Flow File",
+            "dynamic" : false,
+            "identifiesControllerService" : false,
+            "name" : "Max Rows Per Flow File",
             "sensitive" : false
           }
         },
@@ -1441,7 +1441,13 @@
       }, {
         "backPressureDataSizeThreshold" : "1 GB",
         "backPressureObjectThreshold" : 10000,
-        "bends" : [ ],
+        "bends" : [ {
+          "x" : -96.0,
+          "y" : 192.5
+        }, {
+          "x" : -98.0,
+          "y" : 252.5
+        } ],
         "componentType" : "CONNECTION",
         "destination" : {
           "groupId" : "9518432f-0194-1000-5322-994c5b575b71",
@@ -1611,8 +1617,8 @@
       "outputPorts" : [ ],
       "parameterContextName" : "PostgreSQL Ingestion Parameters",
       "position" : {
-        "x" : -1208.0,
-        "y" : -24.0
+        "x" : -1360.0,
+        "y" : -8.0
       },
       "processGroups" : [ {
         "comments" : "Runs the actual snapshot load for every newly-added table.",
@@ -2749,8 +2755,8 @@
         "outputPorts" : [ ],
         "parameterContextName" : "PostgreSQL Ingestion Parameters",
         "position" : {
-          "x" : -296.0,
-          "y" : 200.0
+          "x" : -288.0,
+          "y" : 264.0
         },
         "processGroups" : [ ],
         "processors" : [ {
@@ -2760,7 +2766,7 @@
           "bundle" : {
             "artifact" : "nifi-standard-nar",
             "group" : "org.apache.nifi",
-            "version" : "2025.10.30.21"
+            "version" : "2025.11.20.19"
           },
           "comments" : "Adds additional metadata columns to the source schema.",
           "componentType" : "PROCESSOR",
@@ -2843,7 +2849,7 @@
           "bundle" : {
             "artifact" : "nifi-standard-nar",
             "group" : "org.apache.nifi",
-            "version" : "2025.10.30.21"
+            "version" : "2025.11.20.19"
           },
           "comments" : "Removes metadata columns before the table schema is used to fetch snapshot data.",
           "componentType" : "PROCESSOR",
@@ -2910,7 +2916,7 @@
           "bundle" : {
             "artifact" : "nifi-standard-nar",
             "group" : "org.apache.nifi",
-            "version" : "2025.10.30.21"
+            "version" : "2025.11.20.19"
           },
           "comments" : "",
           "componentType" : "PROCESSOR",
@@ -2961,7 +2967,7 @@
           "bundle" : {
             "artifact" : "nifi-standard-nar",
             "group" : "org.apache.nifi",
-            "version" : "2025.10.30.21"
+            "version" : "2025.11.20.19"
           },
           "comments" : "Puts an entry in the logs indicating the completion of the snapshot load.",
           "componentType" : "PROCESSOR",
@@ -2977,29 +2983,29 @@
             "y" : 2280.0
           },
           "properties" : {
-            "log-message" : "Completed snapshot of ${source.schema.name}.${source.table.name} consisting of ${start.row.index:plus( ${rows.fetched} )} rows in ${now():minus( ${lineageStartDate} ):divide(1000)} seconds",
-            "log-level" : "info"
+            "Log Message" : "Completed snapshot of ${source.schema.name}.${source.table.name} consisting of ${start.row.index:plus( ${rows.fetched} )} rows in ${now():minus( ${lineageStartDate} ):divide(1000)} seconds",
+            "Log Level" : "info"
           },
           "propertyDescriptors" : {
-            "log-message" : {
-              "displayName" : "Log message",
+            "Log Message" : {
+              "displayName" : "Log Message",
               "dynamic" : false,
               "identifiesControllerService" : false,
-              "name" : "log-message",
+              "name" : "Log Message",
               "sensitive" : false
             },
-            "log-level" : {
+            "Log Level" : {
               "displayName" : "Log Level",
               "dynamic" : false,
               "identifiesControllerService" : false,
-              "name" : "log-level",
+              "name" : "Log Level",
               "sensitive" : false
             },
-            "log-prefix" : {
-              "displayName" : "Log prefix",
+            "Log Prefix" : {
+              "displayName" : "Log Prefix",
               "dynamic" : false,
               "identifiesControllerService" : false,
-              "name" : "log-prefix",
+              "name" : "Log Prefix",
               "sensitive" : false
             }
           },
@@ -3019,7 +3025,7 @@
           "bundle" : {
             "artifact" : "nifi-standard-nar",
             "group" : "org.apache.nifi",
-            "version" : "2025.10.30.21"
+            "version" : "2025.11.20.19"
           },
           "comments" : "",
           "componentType" : "PROCESSOR",
@@ -3070,7 +3076,7 @@
           "bundle" : {
             "artifact" : "nifi-standard-nar",
             "group" : "org.apache.nifi",
-            "version" : "2025.10.30.21"
+            "version" : "2025.11.20.19"
           },
           "comments" : "",
           "componentType" : "PROCESSOR",
@@ -3121,7 +3127,7 @@
           "bundle" : {
             "artifact" : "runtime-database-cdc-processors-nar",
             "group" : "com.snowflake.openflow.runtime",
-            "version" : "2025.10.30.21"
+            "version" : "2025.11.20.19"
           },
           "comments" : "",
           "componentType" : "PROCESSOR",
@@ -3188,7 +3194,7 @@
           "bundle" : {
             "artifact" : "runtime-snowpipe-processors-nar",
             "group" : "com.snowflake.openflow.runtime",
-            "version" : "2025.10.30.21"
+            "version" : "2025.11.20.19"
           },
           "comments" : "",
           "componentType" : "PROCESSOR",
@@ -3389,7 +3395,7 @@
           "bundle" : {
             "artifact" : "runtime-database-cdc-processors-nar",
             "group" : "com.snowflake.openflow.runtime",
-            "version" : "2025.10.30.21"
+            "version" : "2025.11.20.19"
           },
           "comments" : "Updates the replication state of the table to indicate that its snapshot load is complete.",
           "componentType" : "PROCESSOR",
@@ -3472,7 +3478,7 @@
           "bundle" : {
             "artifact" : "runtime-database-cdc-processors-nar",
             "group" : "com.snowflake.openflow.runtime",
-            "version" : "2025.10.30.21"
+            "version" : "2025.11.20.19"
           },
           "comments" : "Updates the table's state to \"permanently failed\" due to an unrecoverable error encountered by the connector.",
           "componentType" : "PROCESSOR",
@@ -3555,7 +3561,7 @@
           "bundle" : {
             "artifact" : "runtime-database-cdc-processors-nar",
             "group" : "com.snowflake.openflow.runtime",
-            "version" : "2025.10.30.21"
+            "version" : "2025.11.20.19"
           },
           "comments" : "Waits until the replication state of the table indicates that the connector started collecting incremental changes for it. This ensures consistent replication of all changes to the source data made while the snapshot load is running.",
           "componentType" : "PROCESSOR",
@@ -3606,7 +3612,7 @@
           "bundle" : {
             "artifact" : "runtime-database-cdc-processors-nar",
             "group" : "com.snowflake.openflow.runtime",
-            "version" : "2025.10.30.21"
+            "version" : "2025.11.20.19"
           },
           "comments" : "Retrieves the initial snapshot of data from the source table.",
           "componentType" : "PROCESSOR",
@@ -3701,7 +3707,7 @@
           "bundle" : {
             "artifact" : "nifi-standard-nar",
             "group" : "org.apache.nifi",
-            "version" : "2025.10.30.21"
+            "version" : "2025.11.20.19"
           },
           "comments" : "Verifies that all FlowFiles with source table rows were processed and replicated.",
           "componentType" : "PROCESSOR",
@@ -3752,7 +3758,7 @@
           "bundle" : {
             "artifact" : "runtime-snowflake-processors-nar",
             "group" : "com.snowflake.openflow.runtime",
-            "version" : "2025.10.30.21"
+            "version" : "2025.11.20.19"
           },
           "comments" : "Creates the destination table in Snowflake.",
           "componentType" : "PROCESSOR",
@@ -3974,7 +3980,7 @@
           "bundle" : {
             "artifact" : "runtime-snowflake-processors-nar",
             "group" : "com.snowflake.openflow.runtime",
-            "version" : "2025.10.30.21"
+            "version" : "2025.11.20.19"
           },
           "comments" : "Creates the destination table in Snowflake.",
           "componentType" : "PROCESSOR",
@@ -4196,7 +4202,7 @@
           "bundle" : {
             "artifact" : "runtime-snowflake-processors-nar",
             "group" : "com.snowflake.openflow.runtime",
-            "version" : "2025.10.30.21"
+            "version" : "2025.11.20.19"
           },
           "comments" : "Creates the schema for the source table in Snowflake.",
           "componentType" : "PROCESSOR",
@@ -4271,7 +4277,7 @@
           "bundle" : {
             "artifact" : "nifi-update-attribute-nar",
             "group" : "org.apache.nifi",
-            "version" : "2025.10.30.21"
+            "version" : "2025.11.20.19"
           },
           "comments" : "",
           "componentType" : "PROCESSOR",
@@ -4288,7 +4294,7 @@
           },
           "properties" : {
             "Store State" : "Do not store state",
-            "canonical-value-lookup-cache-size" : "100",
+            "Cache Value Lookup Cache Size" : "100",
             "destination.schema.name" : "${#{Object Identifier Resolution}:equals('CASE_INSENSITIVE'):ifElse(${source.schema.name:toUpper()},${source.schema.name})}",
             "destination.table.name" : "${#{Object Identifier Resolution}:equals('CASE_INSENSITIVE'):ifElse(${source.table.name:toUpper()},${source.table.name})}"
           },
@@ -4307,11 +4313,11 @@
               "name" : "Store State",
               "sensitive" : false
             },
-            "canonical-value-lookup-cache-size" : {
+            "Cache Value Lookup Cache Size" : {
               "displayName" : "Cache Value Lookup Cache Size",
               "dynamic" : false,
               "identifiesControllerService" : false,
-              "name" : "canonical-value-lookup-cache-size",
+              "name" : "Cache Value Lookup Cache Size",
               "sensitive" : false
             },
             "Stateful Variables Initial Value" : {
@@ -4352,7 +4358,7 @@
           "bundle" : {
             "artifact" : "nifi-standard-nar",
             "group" : "org.apache.nifi",
-            "version" : "2025.10.30.21"
+            "version" : "2025.11.20.19"
           },
           "comments" : "",
           "componentType" : "PROCESSOR",
@@ -4424,7 +4430,7 @@
         "bundle" : {
           "artifact" : "runtime-database-cdc-processors-nar",
           "group" : "com.snowflake.openflow.runtime",
-          "version" : "2025.10.30.21"
+          "version" : "2025.11.20.19"
         },
         "comments" : "Removes tables from the connector's list of replicating tables.",
         "componentType" : "PROCESSOR",
@@ -4507,7 +4513,7 @@
         "bundle" : {
           "artifact" : "runtime-database-cdc-processors-nar",
           "group" : "com.snowflake.openflow.runtime",
-          "version" : "2025.10.30.21"
+          "version" : "2025.11.20.19"
         },
         "comments" : "Registers tables that have been newly added to replication, and transfers them to begin replication.",
         "componentType" : "PROCESSOR",
@@ -4590,7 +4596,7 @@
         "bundle" : {
           "artifact" : "nifi-standard-nar",
           "group" : "org.apache.nifi",
-          "version" : "2025.10.30.21"
+          "version" : "2025.11.20.19"
         },
         "comments" : "Defines the tables or table patterns that should be included in replication.",
         "componentType" : "PROCESSOR",
@@ -4602,27 +4608,20 @@
         "name" : "Set Tables for Replication",
         "penaltyDuration" : "30 sec",
         "position" : {
-          "x" : -280.0,
-          "y" : -680.0
+          "x" : -208.0,
+          "y" : -720.0
         },
         "properties" : {
-          "character-set" : "UTF-8",
           "File Size" : "0B",
           "included.table.regex" : "#{Included Table Regex}",
           "Batch Size" : "1",
           "Unique FlowFiles" : "false",
           "included.table.names" : "#{Included Table Names}",
+          "Character Set" : "UTF-8",
           "Data Format" : "Text",
           "ingestion.type" : "#{Ingestion Type}"
         },
         "propertyDescriptors" : {
-          "character-set" : {
-            "displayName" : "Character Set",
-            "dynamic" : false,
-            "identifiesControllerService" : false,
-            "name" : "character-set",
-            "sensitive" : false
-          },
           "File Size" : {
             "displayName" : "File Size",
             "dynamic" : false,
@@ -4630,25 +4629,11 @@
             "name" : "File Size",
             "sensitive" : false
           },
-          "mime-type" : {
-            "displayName" : "Mime Type",
-            "dynamic" : false,
-            "identifiesControllerService" : false,
-            "name" : "mime-type",
-            "sensitive" : false
-          },
           "included.table.regex" : {
             "displayName" : "included.table.regex",
             "dynamic" : true,
             "identifiesControllerService" : false,
             "name" : "included.table.regex",
-            "sensitive" : false
-          },
-          "generate-ff-custom-text" : {
-            "displayName" : "Custom Text",
-            "dynamic" : false,
-            "identifiesControllerService" : false,
-            "name" : "generate-ff-custom-text",
             "sensitive" : false
           },
           "Batch Size" : {
@@ -4665,11 +4650,32 @@
             "name" : "Unique FlowFiles",
             "sensitive" : false
           },
+          "Mime Type" : {
+            "displayName" : "Mime Type",
+            "dynamic" : false,
+            "identifiesControllerService" : false,
+            "name" : "Mime Type",
+            "sensitive" : false
+          },
           "included.table.names" : {
             "displayName" : "included.table.names",
             "dynamic" : true,
             "identifiesControllerService" : false,
             "name" : "included.table.names",
+            "sensitive" : false
+          },
+          "Custom Text" : {
+            "displayName" : "Custom Text",
+            "dynamic" : false,
+            "identifiesControllerService" : false,
+            "name" : "Custom Text",
+            "sensitive" : false
+          },
+          "Character Set" : {
+            "displayName" : "Character Set",
+            "dynamic" : false,
+            "identifiesControllerService" : false,
+            "name" : "Character Set",
             "sensitive" : false
           },
           "Data Format" : {
@@ -4703,7 +4709,7 @@
         "bundle" : {
           "artifact" : "runtime-database-cdc-processors-nar",
           "group" : "com.snowflake.openflow.runtime",
-          "version" : "2025.10.30.21"
+          "version" : "2025.11.20.19"
         },
         "comments" : "Queries the source database for a list of accessible tables, and selects the ones configured for replication.",
         "componentType" : "PROCESSOR",
@@ -4762,7 +4768,7 @@
         "bundle" : {
           "artifact" : "runtime-database-cdc-processors-nar",
           "group" : "com.snowflake.openflow.runtime",
-          "version" : "2025.10.30.21"
+          "version" : "2025.11.20.19"
         },
         "comments" : "",
         "componentType" : "PROCESSOR",
@@ -5884,7 +5890,7 @@
           "bundle" : {
             "artifact" : "runtime-database-cdc-processors-nar",
             "group" : "com.snowflake.openflow.runtime",
-            "version" : "2025.10.30.21"
+            "version" : "2025.11.20.19"
           },
           "comments" : "Converts the source table schema to the journal table schema.",
           "componentType" : "PROCESSOR",
@@ -5917,7 +5923,7 @@
           "bundle" : {
             "artifact" : "runtime-database-cdc-processors-nar",
             "group" : "com.snowflake.openflow.runtime",
-            "version" : "2025.10.30.21"
+            "version" : "2025.11.20.19"
           },
           "comments" : "Change the replication state of the table to permanently failed, requiring manual intervention.",
           "componentType" : "PROCESSOR",
@@ -6000,7 +6006,7 @@
           "bundle" : {
             "artifact" : "runtime-snowflake-processors-nar",
             "group" : "com.snowflake.openflow.runtime",
-            "version" : "2025.10.30.21"
+            "version" : "2025.11.20.19"
           },
           "comments" : "Creates the schema for the journal table.",
           "componentType" : "PROCESSOR",
@@ -6075,7 +6081,7 @@
           "bundle" : {
             "artifact" : "runtime-snowflake-processors-nar",
             "group" : "com.snowflake.openflow.runtime",
-            "version" : "2025.10.30.21"
+            "version" : "2025.11.20.19"
           },
           "comments" : "",
           "componentType" : "PROCESSOR",
@@ -6298,7 +6304,7 @@
           "bundle" : {
             "artifact" : "runtime-snowflake-processors-nar",
             "group" : "com.snowflake.openflow.runtime",
-            "version" : "2025.10.30.21"
+            "version" : "2025.11.20.19"
           },
           "comments" : "",
           "componentType" : "PROCESSOR",
@@ -6394,7 +6400,7 @@
         "bundle" : {
           "artifact" : "runtime-database-cdc-processors-nar",
           "group" : "com.snowflake.openflow.runtime",
-          "version" : "2025.10.30.21"
+          "version" : "2025.11.20.19"
         },
         "comments" : "Read CDC events from the PostgreSQL stream for tables added to replication. Ignore changes from other tables.",
         "componentType" : "PROCESSOR",
@@ -6552,7 +6558,7 @@
         "bundle" : {
           "artifact" : "nifi-standard-nar",
           "group" : "org.apache.nifi",
-          "version" : "2025.10.30.21"
+          "version" : "2025.11.20.19"
         },
         "comments" : "Collect incoming rows into bigger FlowFiles to process them more efficiently later.",
         "componentType" : "PROCESSOR",
@@ -6568,25 +6574,32 @@
           "y" : -232.0
         },
         "properties" : {
+          "Metadata Strategy" : "Do Not Merge Uncommon Metadata",
           "Keep Path" : "false",
           "Merge Strategy" : "Bin-Packing Algorithm",
           "Attribute Strategy" : "Keep Only Common Attributes",
           "FlowFile Insertion Strategy" : "Isolated",
           "Compression Level" : "1",
           "Maximum Number of Entries" : "10000",
+          "Maximum Number of Bins" : "1000",
           "Minimum Group Size" : "0 B",
-          "Maximum number of Bins" : "1000",
           "Tar Modified Time" : "${file.lastModifiedTime}",
           "Delimiter Strategy" : "Text",
           "Merge Format" : "Binary Concatenation",
           "Max Bin Age" : "1 min",
-          "Demarcator File" : "\n",
           "Correlation Attribute Name" : "source.table.fqn",
+          "Demarcator" : "\n",
           "Bin Termination Check" : "${cdc.event.type:equalsIgnoreCase('ddl')}",
-          "mergecontent-metadata-strategy" : "Do Not Merge Uncommon Metadata",
           "Minimum Number of Entries" : "100"
         },
         "propertyDescriptors" : {
+          "Metadata Strategy" : {
+            "displayName" : "Metadata Strategy",
+            "dynamic" : false,
+            "identifiesControllerService" : false,
+            "name" : "Metadata Strategy",
+            "sensitive" : false
+          },
           "Keep Path" : {
             "displayName" : "Keep Path",
             "dynamic" : false,
@@ -6636,18 +6649,18 @@
             "name" : "Maximum Number of Entries",
             "sensitive" : false
           },
+          "Maximum Number of Bins" : {
+            "displayName" : "Maximum Number of Bins",
+            "dynamic" : false,
+            "identifiesControllerService" : false,
+            "name" : "Maximum Number of Bins",
+            "sensitive" : false
+          },
           "Minimum Group Size" : {
             "displayName" : "Minimum Group Size",
             "dynamic" : false,
             "identifiesControllerService" : false,
             "name" : "Minimum Group Size",
-            "sensitive" : false
-          },
-          "Maximum number of Bins" : {
-            "displayName" : "Maximum number of Bins",
-            "dynamic" : false,
-            "identifiesControllerService" : false,
-            "name" : "Maximum number of Bins",
             "sensitive" : false
           },
           "Tar Modified Time" : {
@@ -6664,22 +6677,22 @@
             "name" : "Delimiter Strategy",
             "sensitive" : false
           },
+          "Header" : {
+            "displayName" : "Header",
+            "dynamic" : false,
+            "identifiesControllerService" : false,
+            "name" : "Header",
+            "resourceDefinition" : {
+              "cardinality" : "SINGLE",
+              "resourceTypes" : [ "FILE", "TEXT" ]
+            },
+            "sensitive" : false
+          },
           "Merge Format" : {
             "displayName" : "Merge Format",
             "dynamic" : false,
             "identifiesControllerService" : false,
             "name" : "Merge Format",
-            "sensitive" : false
-          },
-          "Footer File" : {
-            "displayName" : "Footer",
-            "dynamic" : false,
-            "identifiesControllerService" : false,
-            "name" : "Footer File",
-            "resourceDefinition" : {
-              "cardinality" : "SINGLE",
-              "resourceTypes" : [ "FILE", "TEXT" ]
-            },
             "sensitive" : false
           },
           "Max Bin Age" : {
@@ -6689,11 +6702,11 @@
             "name" : "Max Bin Age",
             "sensitive" : false
           },
-          "Demarcator File" : {
-            "displayName" : "Demarcator",
+          "Footer" : {
+            "displayName" : "Footer",
             "dynamic" : false,
             "identifiesControllerService" : false,
-            "name" : "Demarcator File",
+            "name" : "Footer",
             "resourceDefinition" : {
               "cardinality" : "SINGLE",
               "resourceTypes" : [ "FILE", "TEXT" ]
@@ -6707,29 +6720,22 @@
             "name" : "Correlation Attribute Name",
             "sensitive" : false
           },
-          "Bin Termination Check" : {
-            "displayName" : "Bin Termination Check",
+          "Demarcator" : {
+            "displayName" : "Demarcator",
             "dynamic" : false,
             "identifiesControllerService" : false,
-            "name" : "Bin Termination Check",
-            "sensitive" : false
-          },
-          "Header File" : {
-            "displayName" : "Header",
-            "dynamic" : false,
-            "identifiesControllerService" : false,
-            "name" : "Header File",
+            "name" : "Demarcator",
             "resourceDefinition" : {
               "cardinality" : "SINGLE",
               "resourceTypes" : [ "FILE", "TEXT" ]
             },
             "sensitive" : false
           },
-          "mergecontent-metadata-strategy" : {
-            "displayName" : "Metadata Strategy",
+          "Bin Termination Check" : {
+            "displayName" : "Bin Termination Check",
             "dynamic" : false,
             "identifiesControllerService" : false,
-            "name" : "mergecontent-metadata-strategy",
+            "name" : "Bin Termination Check",
             "sensitive" : false
           },
           "Minimum Number of Entries" : {
@@ -6756,7 +6762,7 @@
         "bundle" : {
           "artifact" : "runtime-database-cdc-processors-nar",
           "group" : "com.snowflake.openflow.runtime",
-          "version" : "2025.10.30.21"
+          "version" : "2025.11.20.19"
         },
         "comments" : "Handles DDL events from the CDC stream, checking whether the journal and destination table need to be updated.",
         "componentType" : "PROCESSOR",
@@ -6823,7 +6829,7 @@
         "bundle" : {
           "artifact" : "runtime-database-cdc-processors-nar",
           "group" : "com.snowflake.openflow.runtime",
-          "version" : "2025.10.30.21"
+          "version" : "2025.11.20.19"
         },
         "comments" : "Change the replication state of the table to permanently failed, requiring manual intervention.",
         "componentType" : "PROCESSOR",
@@ -6906,7 +6912,7 @@
         "bundle" : {
           "artifact" : "nifi-standard-nar",
           "group" : "org.apache.nifi",
-          "version" : "2025.10.30.21"
+          "version" : "2025.11.20.19"
         },
         "comments" : "Drops the first DDL FlowFile to prevent it from deleting a freshly-created journal table.",
         "componentType" : "PROCESSOR",
@@ -6957,7 +6963,7 @@
         "bundle" : {
           "artifact" : "runtime-snowpipe-processors-nar",
           "group" : "com.snowflake.openflow.runtime",
-          "version" : "2025.10.30.21"
+          "version" : "2025.11.20.19"
         },
         "comments" : "",
         "componentType" : "PROCESSOR",
@@ -7156,7 +7162,7 @@
         "bundle" : {
           "artifact" : "nifi-standard-nar",
           "group" : "org.apache.nifi",
-          "version" : "2025.10.30.21"
+          "version" : "2025.11.20.19"
         },
         "comments" : "Removes source rows from FlowFiles after they were uploaded to Snowflake. Keeps attributes for use later in the flow.",
         "componentType" : "PROCESSOR",
@@ -7172,8 +7178,8 @@
           "y" : 408.0
         },
         "properties" : {
-          "Regular Expression" : "(?s)(^.*$)",
           "Replacement Value" : "",
+          "Search Value" : "(?s)(^.*$)",
           "Evaluation Mode" : "Entire text",
           "Line-by-Line Evaluation Mode" : "All",
           "Character Set" : "UTF-8",
@@ -7181,18 +7187,18 @@
           "Replacement Strategy" : "Always Replace"
         },
         "propertyDescriptors" : {
-          "Regular Expression" : {
-            "displayName" : "Search Value",
-            "dynamic" : false,
-            "identifiesControllerService" : false,
-            "name" : "Regular Expression",
-            "sensitive" : false
-          },
           "Replacement Value" : {
             "displayName" : "Replacement Value",
             "dynamic" : false,
             "identifiesControllerService" : false,
             "name" : "Replacement Value",
+            "sensitive" : false
+          },
+          "Search Value" : {
+            "displayName" : "Search Value",
+            "dynamic" : false,
+            "identifiesControllerService" : false,
+            "name" : "Search Value",
             "sensitive" : false
           },
           "Evaluation Mode" : {
@@ -7261,7 +7267,7 @@
         "bundle" : {
           "artifact" : "runtime-database-cdc-processors-nar",
           "group" : "com.snowflake.openflow.runtime",
-          "version" : "2025.10.30.21"
+          "version" : "2025.11.20.19"
         },
         "comments" : "Change the replication state of the table to permanently failed, requiring manual intervention.",
         "componentType" : "PROCESSOR",
@@ -7344,7 +7350,7 @@
         "bundle" : {
           "artifact" : "nifi-update-attribute-nar",
           "group" : "org.apache.nifi",
-          "version" : "2025.10.30.21"
+          "version" : "2025.11.20.19"
         },
         "comments" : "Add an extra attribute to the FlowFile with the source table's Fully Qualified Name.",
         "componentType" : "PROCESSOR",
@@ -7361,8 +7367,8 @@
         },
         "properties" : {
           "Store State" : "Do not store state",
-          "canonical-value-lookup-cache-size" : "100",
-          "source.table.fqn" : "${source.schema.name}.${source.table.name}"
+          "source.table.fqn" : "${source.schema.name}.${source.table.name}",
+          "Cache Value Lookup Cache Size" : "100"
         },
         "propertyDescriptors" : {
           "Delete Attributes Expression" : {
@@ -7379,18 +7385,18 @@
             "name" : "Store State",
             "sensitive" : false
           },
-          "canonical-value-lookup-cache-size" : {
-            "displayName" : "Cache Value Lookup Cache Size",
-            "dynamic" : false,
-            "identifiesControllerService" : false,
-            "name" : "canonical-value-lookup-cache-size",
-            "sensitive" : false
-          },
           "source.table.fqn" : {
             "displayName" : "source.table.fqn",
             "dynamic" : true,
             "identifiesControllerService" : false,
             "name" : "source.table.fqn",
+            "sensitive" : false
+          },
+          "Cache Value Lookup Cache Size" : {
+            "displayName" : "Cache Value Lookup Cache Size",
+            "dynamic" : false,
+            "identifiesControllerService" : false,
+            "name" : "Cache Value Lookup Cache Size",
             "sensitive" : false
           },
           "Stateful Variables Initial Value" : {
@@ -7417,7 +7423,7 @@
         "bundle" : {
           "artifact" : "runtime-database-cdc-processors-nar",
           "group" : "com.snowflake.openflow.runtime",
-          "version" : "2025.10.30.21"
+          "version" : "2025.11.20.19"
         },
         "comments" : "Merges all pending changes from the journal table into the destination.",
         "componentType" : "PROCESSOR",
@@ -7500,7 +7506,7 @@
         "bundle" : {
           "artifact" : "runtime-database-cdc-processors-nar",
           "group" : "com.snowflake.openflow.runtime",
-          "version" : "2025.10.30.21"
+          "version" : "2025.11.20.19"
         },
         "comments" : "Waits until the Snapshot load for a table is complete, and the connector can start merging incremental changes.",
         "componentType" : "PROCESSOR",
@@ -7551,7 +7557,7 @@
         "bundle" : {
           "artifact" : "nifi-update-attribute-nar",
           "group" : "org.apache.nifi",
-          "version" : "2025.10.30.21"
+          "version" : "2025.11.20.19"
         },
         "comments" : "",
         "componentType" : "PROCESSOR",
@@ -7568,7 +7574,7 @@
         },
         "properties" : {
           "Store State" : "Do not store state",
-          "canonical-value-lookup-cache-size" : "100",
+          "Cache Value Lookup Cache Size" : "100",
           "destination.schema.name" : "${#{Object Identifier Resolution}:equals('CASE_INSENSITIVE'):ifElse(${source.schema.name:toUpper()},${source.schema.name})}",
           "destination.table.name" : "${#{Object Identifier Resolution}:equals('CASE_INSENSITIVE'):ifElse(${source.table.name:toUpper()},${source.table.name})}"
         },
@@ -7587,11 +7593,11 @@
             "name" : "Store State",
             "sensitive" : false
           },
-          "canonical-value-lookup-cache-size" : {
+          "Cache Value Lookup Cache Size" : {
             "displayName" : "Cache Value Lookup Cache Size",
             "dynamic" : false,
             "identifiesControllerService" : false,
-            "name" : "canonical-value-lookup-cache-size",
+            "name" : "Cache Value Lookup Cache Size",
             "sensitive" : false
           },
           "Stateful Variables Initial Value" : {
@@ -7632,7 +7638,7 @@
         "bundle" : {
           "artifact" : "runtime-snowflake-processors-nar",
           "group" : "com.snowflake.openflow.runtime",
-          "version" : "2025.10.30.21"
+          "version" : "2025.11.20.19"
         },
         "comments" : "Changes the destination table based on the incoming DDL event.",
         "componentType" : "PROCESSOR",
@@ -7856,7 +7862,7 @@
         "bundle" : {
           "artifact" : "runtime-snowflake-processors-nar",
           "group" : "com.snowflake.openflow.runtime",
-          "version" : "2025.10.30.21"
+          "version" : "2025.11.20.19"
         },
         "comments" : "",
         "componentType" : "PROCESSOR",
@@ -8106,7 +8112,7 @@
         "bundle" : {
           "artifact" : "nifi-standard-nar",
           "group" : "org.apache.nifi",
-          "version" : "2025.10.30.21"
+          "version" : "2025.11.20.19"
         },
         "comments" : "Group all FlowFiles related to same table to limitate merge calls. Use this processor to schedule with cron when warehouse should be active.",
         "componentType" : "PROCESSOR",
@@ -8122,24 +8128,31 @@
           "y" : 832.0
         },
         "properties" : {
+          "Metadata Strategy" : "Do Not Merge Uncommon Metadata",
           "Keep Path" : "false",
           "Merge Strategy" : "Bin-Packing Algorithm",
           "Attribute Strategy" : "Keep Only Common Attributes",
           "FlowFile Insertion Strategy" : "Isolated",
           "Compression Level" : "1",
           "Maximum Number of Entries" : "10000000",
+          "Maximum Number of Bins" : "1000",
           "Minimum Group Size" : "0 B",
-          "Maximum number of Bins" : "1000",
           "Tar Modified Time" : "${file.lastModifiedTime}",
           "Delimiter Strategy" : "Text",
           "Merge Format" : "Binary Concatenation",
           "Max Bin Age" : "10s",
           "Correlation Attribute Name" : "source.table.fqn",
           "Bin Termination Check" : "${cdc.event.type:equalsIgnoreCase('ddl')}",
-          "mergecontent-metadata-strategy" : "Do Not Merge Uncommon Metadata",
           "Minimum Number of Entries" : "1"
         },
         "propertyDescriptors" : {
+          "Metadata Strategy" : {
+            "displayName" : "Metadata Strategy",
+            "dynamic" : false,
+            "identifiesControllerService" : false,
+            "name" : "Metadata Strategy",
+            "sensitive" : false
+          },
           "Keep Path" : {
             "displayName" : "Keep Path",
             "dynamic" : false,
@@ -8189,18 +8202,18 @@
             "name" : "Maximum Number of Entries",
             "sensitive" : false
           },
+          "Maximum Number of Bins" : {
+            "displayName" : "Maximum Number of Bins",
+            "dynamic" : false,
+            "identifiesControllerService" : false,
+            "name" : "Maximum Number of Bins",
+            "sensitive" : false
+          },
           "Minimum Group Size" : {
             "displayName" : "Minimum Group Size",
             "dynamic" : false,
             "identifiesControllerService" : false,
             "name" : "Minimum Group Size",
-            "sensitive" : false
-          },
-          "Maximum number of Bins" : {
-            "displayName" : "Maximum number of Bins",
-            "dynamic" : false,
-            "identifiesControllerService" : false,
-            "name" : "Maximum number of Bins",
             "sensitive" : false
           },
           "Tar Modified Time" : {
@@ -8217,22 +8230,22 @@
             "name" : "Delimiter Strategy",
             "sensitive" : false
           },
+          "Header" : {
+            "displayName" : "Header",
+            "dynamic" : false,
+            "identifiesControllerService" : false,
+            "name" : "Header",
+            "resourceDefinition" : {
+              "cardinality" : "SINGLE",
+              "resourceTypes" : [ "FILE", "TEXT" ]
+            },
+            "sensitive" : false
+          },
           "Merge Format" : {
             "displayName" : "Merge Format",
             "dynamic" : false,
             "identifiesControllerService" : false,
             "name" : "Merge Format",
-            "sensitive" : false
-          },
-          "Footer File" : {
-            "displayName" : "Footer",
-            "dynamic" : false,
-            "identifiesControllerService" : false,
-            "name" : "Footer File",
-            "resourceDefinition" : {
-              "cardinality" : "SINGLE",
-              "resourceTypes" : [ "FILE", "TEXT" ]
-            },
             "sensitive" : false
           },
           "Max Bin Age" : {
@@ -8242,11 +8255,11 @@
             "name" : "Max Bin Age",
             "sensitive" : false
           },
-          "Demarcator File" : {
-            "displayName" : "Demarcator",
+          "Footer" : {
+            "displayName" : "Footer",
             "dynamic" : false,
             "identifiesControllerService" : false,
-            "name" : "Demarcator File",
+            "name" : "Footer",
             "resourceDefinition" : {
               "cardinality" : "SINGLE",
               "resourceTypes" : [ "FILE", "TEXT" ]
@@ -8260,29 +8273,22 @@
             "name" : "Correlation Attribute Name",
             "sensitive" : false
           },
-          "Bin Termination Check" : {
-            "displayName" : "Bin Termination Check",
+          "Demarcator" : {
+            "displayName" : "Demarcator",
             "dynamic" : false,
             "identifiesControllerService" : false,
-            "name" : "Bin Termination Check",
-            "sensitive" : false
-          },
-          "Header File" : {
-            "displayName" : "Header",
-            "dynamic" : false,
-            "identifiesControllerService" : false,
-            "name" : "Header File",
+            "name" : "Demarcator",
             "resourceDefinition" : {
               "cardinality" : "SINGLE",
               "resourceTypes" : [ "FILE", "TEXT" ]
             },
             "sensitive" : false
           },
-          "mergecontent-metadata-strategy" : {
-            "displayName" : "Metadata Strategy",
+          "Bin Termination Check" : {
+            "displayName" : "Bin Termination Check",
             "dynamic" : false,
             "identifiesControllerService" : false,
-            "name" : "mergecontent-metadata-strategy",
+            "name" : "Bin Termination Check",
             "sensitive" : false
           },
           "Minimum Number of Entries" : {
@@ -8317,14 +8323,14 @@
   "parameterContexts" : {
     "PostgreSQL Ingestion Parameters" : {
       "componentType" : "PARAMETER_CONTEXT",
-      "inheritedParameterContexts" : [ "PostgreSQL Destination Parameters", "PostgreSQL Source Parameters" ],
+      "description" : "Changed cron",
+      "inheritedParameterContexts" : [ "Environment Context", "PostgreSQL Destination Parameters", "PostgreSQL Source Parameters" ],
       "name" : "PostgreSQL Ingestion Parameters",
       "parameters" : [ {
         "description" : "A JSON specifying which columns and column patterns should be included or excluded from replication, per table. Takes the form of an array with one object per table, e.g. [ {\"schema\":\"public\", \"table\":\"table1\", \"includedPattern\":\".*name\"} ] - this will include all columns that end with 'name' in the 'table1' from the 'public' schema",
         "name" : "Column Filter JSON",
         "provided" : false,
-        "sensitive" : false,
-        "value" : "[]"
+        "sensitive" : false
       }, {
         "description" : "A comma-separated list of fully-qualified table names that should be replicated. The format should be <schema name>.<table name>. For example: public.table1, public.table2, public.table3",
         "name" : "Included Table Names",
@@ -8334,38 +8340,33 @@
         "description" : "A Regular Expression that can be matched against table names to determine if the table should be included. The Regular Expression should match the fully qualified table name. For example, to include all tables in the \"snowflake\" schema, use snowflake\\..*",
         "name" : "Included Table Regex",
         "provided" : false,
-        "sensitive" : false,
-        "value" : "poc\\..*"
+        "sensitive" : false
       }, {
         "description" : "Determine if snapshot load should be skipped and only incremental CDC phase should take place. If set to \"incremental\" current database rows will not be replicated (snapshot will be skipped) and only new changes will be applied. Default value is \"full\" which means both snapshot and incremental will be performed.",
         "name" : "Ingestion Type",
         "provided" : false,
-        "sensitive" : false,
-        "value" : "full"
+        "sensitive" : false
       }, {
         "description" : "CRON expression defining periods when merge operations from Journal to Destination Table will be triggered. Set it to * * * * * ? if you want to have continuous merge or time schedule to limitate warehouse run time.\nFor example:\n• The string * 0 * * * ? indicates that you want to schedule merges at full hour for one minute\n• The string * 20 14 ? * MON-FRI indicates that you want to schedule merges at 2:20 PM every Monday through Friday.\nFor additional information and examples, see the cron triggers tutorial in the Quartz Documentation https://www.quartz-scheduler.org/documentation/quartz-2.2.2/tutorials/tutorial-lesson-06.html",
         "name" : "Merge Task Schedule CRON",
         "provided" : false,
-        "sensitive" : false,
-        "value" : "* * * * * ?"
+        "sensitive" : false
       }, {
         "description" : "Do not change after initial start of the connector. Determines if schema / table / column names are treated as case-sensitive or case-insensitive. One of: CASE_INSENSITIVE / CASE_SENSITIVE",
         "name" : "Object Identifier Resolution",
         "provided" : false,
-        "sensitive" : false,
-        "value" : "CASE_INSENSITIVE"
+        "sensitive" : false
       } ]
     },
     "PostgreSQL Source Parameters" : {
       "componentType" : "PARAMETER_CONTEXT",
-      "inheritedParameterContexts" : [ "Environment Secrets" ],
+      "inheritedParameterContexts" : [ ],
       "name" : "PostgreSQL Source Parameters",
       "parameters" : [ {
         "description" : "The JDBC Connection URL\nNote: this doesn't seem to work: jdbc:postgresql://#{host}:5432/#{engine}",
         "name" : "PostgreSQL Connection URL",
         "provided" : false,
-        "sensitive" : false,
-        "value" : ""
+        "sensitive" : false
       }, {
         "description" : "The JDBC Driver JAR File reference. Download the jar from its website, then select the 'Reference asset' checkbox to upload and attach it.",
         "name" : "PostgreSQL JDBC Driver",
@@ -8380,32 +8381,28 @@
         "description" : "The username for interacting with PostgreSQL",
         "name" : "PostgreSQL Username",
         "provided" : false,
-        "sensitive" : false,
-        "value" : ""
+        "sensitive" : false
       }, {
         "description" : "The name of the publication created in PostgreSQL database",
         "name" : "Publication Name",
         "provided" : false,
-        "sensitive" : false,
-        "value" : ""
+        "sensitive" : false
       }, {
         "description" : "OPTIONAL. If the replication slot exists, the connector will start using it. If it doesn't, the connector will create a new slot with the provided name. Changing the value for a running connector will restart reading the CDC stream from the updated slot's position.",
         "name" : "Replication Slot Name",
         "provided" : false,
-        "sensitive" : false,
-        "value" : ""
+        "sensitive" : false
       } ]
     },
     "PostgreSQL Destination Parameters" : {
       "componentType" : "PARAMETER_CONTEXT",
-      "inheritedParameterContexts" : [ "Environment Secrets" ],
+      "inheritedParameterContexts" : [ ],
       "name" : "PostgreSQL Destination Parameters",
       "parameters" : [ {
         "description" : "The database where data will be persisted. It must already exist in Snowflake",
         "name" : "Destination Database",
         "provided" : false,
-        "sensitive" : false,
-        "value" : "OLLE_DB_DEV"
+        "sensitive" : false
       }, {
         "description" : "Leave this blank when using Session Token for your Authentication Strategy. When using KEY_PAIR, provide your Snowflake account name formatted as [organization-name]-[account-name] where data will be persisted.",
         "name" : "Snowflake Account Identifier",
@@ -8415,8 +8412,7 @@
         "description" : "When using SPCS, use SNOWFLAKE_SESSION_TOKEN as the value for Authentication Strategy. When using BYOC, use KEY_PAIR as the value for Authentication Strategy.",
         "name" : "Snowflake Authentication Strategy",
         "provided" : false,
-        "sensitive" : false,
-        "value" : "SNOWFLAKE_SESSION_TOKEN"
+        "sensitive" : false
       }, {
         "description" : "Leave this blank when using Session Token for your Authentication Strategy. When using KEY_PAIR, provide the RSA private key used for authentication. The RSA key must be formatted according to PKCS8 standards and have standard PEM headers and footers. Note that either Snowflake Private Key File or Snowflake Private Key must be defined.",
         "name" : "Snowflake Private Key",
@@ -8441,69 +8437,66 @@
         "description" : "Snowflake warehouse used to run queries",
         "name" : "Snowflake Warehouse",
         "provided" : false,
-        "sensitive" : false,
-        "value" : "OPENFLOW_WH"
+        "sensitive" : false
       } ]
     },
-    "Environment Secrets" : {
+    "Environment Context" : {
       "componentType" : "PARAMETER_CONTEXT",
       "inheritedParameterContexts" : [ ],
-      "name" : "Environment Secrets",
+      "name" : "Environment Context",
       "parameterGroupName" : "dev/olle-db",
-      "parameterProvider" : "7285e2e1-019a-1000-ffff-ffffc1078977",
+      "parameterProvider" : "ba4d54f1-019a-1000-ffff-fffff8978904",
       "parameters" : [ {
         "name" : "Destination Database",
         "provided" : true,
-        "sensitive" : false,
-        "value" : "OLLE_DB_DEV"
+        "sensitive" : false
       }, {
         "name" : "PostgreSQL Connection URL",
         "provided" : true,
-        "sensitive" : false,
-        "value" : "jdbc:postgresql://olle-db.cbk06wu2ybl7.eu-north-1.rds.amazonaws.com:5432/postgres"
+        "sensitive" : false
       }, {
         "name" : "PostgreSQL Password",
         "provided" : true,
         "sensitive" : true
       }, {
+        "name" : "PostgreSQL Schema",
+        "provided" : true,
+        "sensitive" : false
+      }, {
         "name" : "PostgreSQL Username",
         "provided" : true,
-        "sensitive" : false,
-        "value" : "olle"
+        "sensitive" : false
       }, {
         "name" : "Publication Name",
         "provided" : true,
-        "sensitive" : false,
-        "value" : "openflow_publication"
+        "sensitive" : false
       }, {
         "name" : "Snowflake Role",
         "provided" : true,
-        "sensitive" : false,
-        "value" : "OPENFLOW_RUNTIME"
+        "sensitive" : false
       }, {
         "name" : "Snowflake Warehouse",
         "provided" : true,
-        "sensitive" : false,
-        "value" : "OPENFLOW_WH"
+        "sensitive" : false
       } ],
       "synchronized" : true
     }
   },
   "parameterProviders" : {
-    "7285e2e1-019a-1000-ffff-ffffc1078977" : {
+    "ba4d54f1-019a-1000-ffff-fffff8978904" : {
       "bundle" : {
         "artifact" : "nifi-aws-nar",
         "group" : "org.apache.nifi",
-        "version" : "2025.10.30.21"
+        "version" : "2025.11.20.19"
       },
-      "identifier" : "7285e2e1-019a-1000-ffff-ffffc1078977",
-      "name" : "AwsSecretsManagerParameterProvider",
+      "identifier" : "ba4d54f1-019a-1000-ffff-fffff8978904",
+      "name" : "AwsSecretsManager",
       "type" : "org.apache.nifi.parameter.aws.AwsSecretsManagerParameterProvider"
     }
   },
   "snapshotMetadata" : {
     "author" : "OSUNI",
     "flowIdentifier" : "postgres20251111",
-    "timestamp" : 1762862163243
+    "timestamp" : 1765285176277
   }
 }

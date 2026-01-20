@@ -1,0 +1,103 @@
+{
+  "externalControllerServices" : { },
+  "flow" : {
+    "createdTimestamp" : 1765285376893,
+    "description" : "dummy sub process",
+    "identifier" : "sub-process",
+    "lastModifiedTimestamp" : 1765285376893,
+    "name" : "sub process",
+    "versionCount" : 0
+  },
+  "flowContents" : {
+    "comments" : "",
+    "componentType" : "PROCESS_GROUP",
+    "connections" : [ ],
+    "controllerServices" : [ ],
+    "defaultBackPressureDataSizeThreshold" : "1 GB",
+    "defaultBackPressureObjectThreshold" : 10000,
+    "defaultFlowFileExpiration" : "0 sec",
+    "executionEngine" : "INHERITED",
+    "externalControllerServiceReferences" : { },
+    "flowFileConcurrency" : "UNBOUNDED",
+    "flowFileOutboundPolicy" : "STREAM_WHEN_AVAILABLE",
+    "funnels" : [ ],
+    "identifier" : "flow-contents-group",
+    "inputPorts" : [ ],
+    "labels" : [ ],
+    "maxConcurrentTasks" : 1,
+    "name" : "sub process",
+    "outputPorts" : [ ],
+    "parameterContextName" : "Environment Context",
+    "position" : {
+      "x" : 0.0,
+      "y" : 0.0
+    },
+    "processGroups" : [ ],
+    "processors" : [ ],
+    "remoteProcessGroups" : [ ],
+    "scheduledState" : "ENABLED",
+    "statelessFlowTimeout" : "1 min"
+  },
+  "flowEncodingVersion" : "1.0",
+  "latest" : false,
+  "parameterContexts" : {
+    "Environment Context" : {
+      "componentType" : "PARAMETER_CONTEXT",
+      "inheritedParameterContexts" : [ ],
+      "name" : "Environment Context",
+      "parameterGroupName" : "dev/olle-db",
+      "parameterProvider" : "ba4d54f1-019a-1000-ffff-fffff8978904",
+      "parameters" : [ {
+        "name" : "Destination Database",
+        "provided" : true,
+        "sensitive" : false
+      }, {
+        "name" : "PostgreSQL Connection URL",
+        "provided" : true,
+        "sensitive" : false
+      }, {
+        "name" : "PostgreSQL Password",
+        "provided" : true,
+        "sensitive" : true
+      }, {
+        "name" : "PostgreSQL Schema",
+        "provided" : true,
+        "sensitive" : false
+      }, {
+        "name" : "PostgreSQL Username",
+        "provided" : true,
+        "sensitive" : false
+      }, {
+        "name" : "Publication Name",
+        "provided" : true,
+        "sensitive" : false
+      }, {
+        "name" : "Snowflake Role",
+        "provided" : true,
+        "sensitive" : false
+      }, {
+        "name" : "Snowflake Warehouse",
+        "provided" : true,
+        "sensitive" : false
+      } ],
+      "synchronized" : true
+    }
+  },
+  "parameterProviders" : {
+    "ba4d54f1-019a-1000-ffff-fffff8978904" : {
+      "bundle" : {
+        "artifact" : "nifi-aws-nar",
+        "group" : "org.apache.nifi",
+        "version" : "2025.11.20.19"
+      },
+      "identifier" : "ba4d54f1-019a-1000-ffff-fffff8978904",
+      "name" : "AwsSecretsManager",
+      "type" : "org.apache.nifi.parameter.aws.AwsSecretsManagerParameterProvider"
+    }
+  },
+  "snapshotMetadata" : {
+    "author" : "OSUNI",
+    "flowIdentifier" : "sub-process",
+    "timestamp" : 1765285377597
+  }
+}
